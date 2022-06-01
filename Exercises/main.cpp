@@ -29,6 +29,9 @@ using namespace iter;
 void runListExample() {
 	{
 		List<int> alexanderThibault = {1, 3, 4};
+		for (auto it = alexanderThibault.begin(); it != alexanderThibault.end(); ++it)
+			cout << *it << " ";
+		cout << "\n";
 		auto it = ++alexanderThibault.begin(); // Faire ++ sur un itérateur le fait avancer, donc faire ++ sur le résultat de begin() (le premier élément) nous amène au deuxième.
 		alexanderThibault.insert(it, 2);
 		cout << alexanderThibault << "\n";
@@ -53,17 +56,37 @@ void runListExample() {
 }
 
 
+void runIteratorExample() {
+	vector<int> v = {2, 1, 42, 12, 69};
+	//auto it = v.begin();
+	//int v[] = {2, 1, 42, 12, 69};
+	//int* begin = v;
+	auto begin = v.begin();
+	//int* end = begin + 5;
+	auto end = v.end();
+	for (auto p = begin; p != end; ++p)
+		cout << *p << " ";
+}
+
+
 int main() {
 	runListExample(); cout << "\n\n\n\n";
+	//runIteratorExample(); cout << "\n\n\n\n";
 
-	const List<int> foo = {1, 2, 3};
-	auto it = foo.begin();
-	cout << *it << "\n";
-	++it;
-	cout << *it << "\n";
-	--it;
-	cout << *it << "\n";
-	for (auto e : foo)
-		cout << e << " ";
+	// Soit f() une fn logarithmique sur taille de v
+	// Soit g() une fn linéaire sur taille de v
+	// Soit n la taille du tableau
+	vector<int> v = {2, 1, 42, 12, 69}; // O(n)
+	for (auto&& e1 : v) {   // O(n)
+		int cnt = 0;        // O(1)
+		for (auto&& e2 : v) // O(n)
+			if (f(e2, v))   // O(log n)
+				g(cnt, v);  // O(n)
+		cout << cnt;        // O(1)
+	}
+	// O(n + n(1 + n(log n + n) + 1))
+	// O(n + n(1 + nlog n + n² + 1))
+	// O(n + n(n²))
+	// O(n³)
 }
 
