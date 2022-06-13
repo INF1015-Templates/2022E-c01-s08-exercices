@@ -167,6 +167,8 @@ public:
 		size_ = other.size_;
 		other.last_ = nullptr;
 		other.size_ = 0;
+
+		return *this;
 	}
 
 	List& operator=(initializer_list<value_type> elements) {
